@@ -68,9 +68,3 @@ void app_main(void)
 
     }
 }
-
-/*************************************
- Reference Material:
- To understand VtaskDelay & portTICK_PERIOD_MS: https://esp32.com/viewtopic.php?t=2377
- Optimizing source code better: https://controllerstech.com/getting-started-with-esp32-and-esp-idf-led-blinking/
-**************************************/
