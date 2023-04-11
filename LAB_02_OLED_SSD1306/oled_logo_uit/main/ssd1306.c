@@ -52,7 +52,7 @@ void ssd1306_display_logo(i2c_port_t i2c_num)
 	i2c_master_write_byte(cmd,0x10, true); // reset line - choose line --> 0
 
 	i2c_master_write_byte(cmd, 0xB0 | cur_page, true); // reset page
-	//0xB0 = 1011 0000 
+
 	i2c_master_stop(cmd);
 	i2c_master_cmd_begin(i2c_num, cmd, 10/portTICK_PERIOD_MS);
 	i2c_cmd_link_delete(cmd);
@@ -60,7 +60,7 @@ void ssd1306_display_logo(i2c_port_t i2c_num)
 	//------------------------------------------------------------
 	//phần xử lý vẽ logo
 
-	for(uint8_t i=0;i<7;i++)
+	for(uint8_t i=0;i<7;i++) //8
 	{	
 			
 		cmd = i2c_cmd_link_create();

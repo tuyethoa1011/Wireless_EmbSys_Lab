@@ -10,5 +10,15 @@
     "idf.pythonBinPathWin": "E:\\esp\\esp-idf\\python_env\\idf4.2_py3.8_env\\Scripts\\python.exe",
     "idf.toolsPathWin": "E:\\esp\\esp-idf",
     "idf.flashType": "UART",
-    "idf.portWin": "COM3"
+    "idf.portWin": "COM3",
+    "files.associations": {
+        "i2c.h": "c",
+        "esp_log.h": "c",
+        "sdkconfig.h": "c",
+        "logo_uit.h": "c",
+        "font8x8_basic.h": "c",
+        "string.h": "c",
+        "stdio.h": "c",
+        "ssd1306.h": "c"
+    }
 }

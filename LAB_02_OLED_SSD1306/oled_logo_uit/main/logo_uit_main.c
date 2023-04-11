@@ -29,20 +29,20 @@
 //khởi tạo biến semaphore
 SemaphoreHandle_t sem1 = NULL;
 
-static void task_id_display_oled(void *arg)
+static void task_display_oled(void *arg)
 {   
     ssd1306_init(I2C_MASTER_NUM);
-    uint32_t task_idx = (uint32_t)arg;
+  
     task_ssd1306_display_clear(I2C_MASTER_NUM);
    
     while(1) //forever loop để chạy task
     {   
         xSemaphoreTake(sem1, portMAX_DELAY); 
         task_ssd1306_display_text("\n\n\nUIT-ER WITH LOVE",I2C_MASTER_NUM);
-        vTaskDelay((DELAY_TIME_BETWEEN_ITEMS_MS * (task_idx + 1)) / portTICK_RATE_MS);
+        vTaskDelay((DELAY_TIME_BETWEEN_ITEMS_MS) / portTICK_RATE_MS);
         task_ssd1306_display_clear(I2C_MASTER_NUM);
         ssd1306_display_logo(I2C_MASTER_NUM);
-        vTaskDelay((DELAY_TIME_BETWEEN_ITEMS_MS * (task_idx + 1)) / portTICK_RATE_MS);
+        vTaskDelay((DELAY_TIME_BETWEEN_ITEMS_MS) / portTICK_RATE_MS);
         task_ssd1306_display_clear(I2C_MASTER_NUM);    
         xSemaphoreGive(sem1);
      
@@ -73,5 +73,5 @@ void app_main(void)
 {   
     sem1 = xSemaphoreCreateMutex();
     ESP_ERROR_CHECK(i2c_master_init());
-    xTaskCreate(task_id_display_oled,"i2c_oled_task_0",1024*2,(void *)0, 10, NULL);
+    xTaskCreate(task_display_oled,"i2c_oled_task_0",1024*2,(void *)0, 10, NULL);
 }

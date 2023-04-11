@@ -73,9 +73,5 @@ uint8_t logo_uit [] = {
 };
 */
 
-//cac buoc lam: resize logo -> chinh cho logo mang mau trang den
-//Sau do dem vao phan mem LCD de chuyen hinh bitmap chuyen sang hex
-//su dung cong cu de ho tro ve logo: https://www.riyas.org/2017/01/online-tool-to-convert-bitmap-to-hex-nokia-arduino.html
-
 #endif /*MAIN_LOGO_UIT_H*/
 

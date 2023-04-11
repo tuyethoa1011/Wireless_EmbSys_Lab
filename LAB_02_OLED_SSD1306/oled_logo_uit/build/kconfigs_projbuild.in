@@ -1,0 +1,5 @@
+source "C:/Users/Hoa/esp/esp-idf/components/app_update/Kconfig.projbuild"
+source "C:/Users/Hoa/esp/esp-idf/components/bootloader/Kconfig.projbuild"
+source "C:/Users/Hoa/esp/esp-idf/components/esptool_py/Kconfig.projbuild"
+source "C:/Users/Hoa/esp/esp-idf/components/partition_table/Kconfig.projbuild"
+source "C:/Users/Hoa/esp_workingspace/oled_logo_uit/main/Kconfig.projbuild"
