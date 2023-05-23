@@ -539,7 +539,7 @@ static void gatts_profile_event_handler(esp_gatts_cb_event_t event, esp_gatt_if_
             if (create_attr_ret){
                 ESP_LOGE(EXAMPLE_TAG, "create attr table failed, error code = %x", create_attr_ret);
             }
-        }
+        }   
             ESP_ERROR_CHECK(i2c_master_init());
             ssd1306_init(I2C_MASTER_NUM);
             task_ssd1306_display_clear(I2C_MASTER_NUM);
