@@ -213,9 +213,9 @@ static const uint8_t char1_name[]  = "Char_1_MSSV_01";
 static const uint8_t char2_name[]  = "Char_2_MSSV_02";
 static const uint8_t char3_name[]  = "Char_3_MSSV_03";
 static const uint8_t char4_name[]  = "Char_4_MSSV_04"; 
-static const uint8_t char_value[4] = {0x11, 0x22, 0x33, 0x44}; //giá trị được khởi  tạo mặc định cho các payload Char
+static const uint8_t char_value[4] = {0x11, 0x22, 0x33, 0x44}; //giá trị được khởi  tạo mặc định cho các payload Char cũng nhàm mục đích debug read BLE
 
-//----- 4 mảng chứa mssv dùng để so sánh dùng cho mục đích debug catch event -----
+//----- 4 mảng chứa mssv dùng để so sánh dùng cho mục đích debug catch event debug thông qua log ESP32 -----
 static const uint8_t hoa_mssv[STUDENT_ID_SIZE] =  {0x20,0x52,0x13,0x33};
 static const uint8_t quy_mssv[STUDENT_ID_SIZE] =  {0x20,0x52,0x18,0x16};
 static const uint8_t phat_mssv[STUDENT_ID_SIZE] =  {0x20,0x52,0x17,0x39};
@@ -544,7 +544,7 @@ static void gatts_profile_event_handler(esp_gatts_cb_event_t event, esp_gatt_if_
             ssd1306_init(I2C_MASTER_NUM);
             task_ssd1306_display_clear(I2C_MASTER_NUM);
 
-            task_ssd1306_display_text("Please input ID of each team member:\n",I2C_MASTER_NUM);
+            task_ssd1306_display_text("Please input ID\nof each team\nmember:\n",I2C_MASTER_NUM);
        	    break;
         case ESP_GATTS_READ_EVT:
             //ESP_LOGE(EXAMPLE_TAG, "ESP_GATTS_READ_EVT, handle=0x%d, offset=%d", param->read.handle, param->read.offset);
@@ -566,36 +566,49 @@ static void gatts_profile_event_handler(esp_gatts_cb_event_t event, esp_gatt_if_
           
        	    break;
         case ESP_GATTS_WRITE_EVT:
+            task_ssd1306_display_clear(I2C_MASTER_NUM);
             if (!param->write.is_prep){
                 if(gatt_db_handle_table[IDX_CHAR_VAL_A] == param->write.handle && param->write.len == 4) {
                     if(memcmp(hoa_mssv, param->write.value, param->write.len) == 0) {
-                        ESP_LOGI(MOBILE_TAG, "Ghi <ID1> thành công! \n"); //Hiển thị thông báo lên ESP32 
-                        task_ssd1306_display_text("ID write success!\n",I2C_MASTER_NUM);
-                        task_ssd1306_display_text(param->write.value, I2C_MASTER_NUM);
+                        ESP_LOGI(MOBILE_TAG, "Ghi <ID1> thành công!\n"); //Hiển thị thông báo lên ESP32 
+                        task_ssd1306_display_text("ID1 write\nsuccess!\n\n20521333",I2C_MASTER_NUM);
+                    } else {
+                        ESP_LOGI (ESP32_TAG,"Bạn đã nhập sai thứ tự hoặc cấu trúc MSSV, vui lòng dùng điện thoại nhập lại!\n");
+                        task_ssd1306_display_clear(I2C_MASTER_NUM);
+                        task_ssd1306_display_text("ERROR!\nCheck ESP32\nlog\n",I2C_MASTER_NUM);
                     }
                 }
 
                 if(gatt_db_handle_table[IDX_CHAR_VAL_B] == param->write.handle && param->write.len == 4) {
                     if(memcmp(quy_mssv, param->write.value, param->write.len) == 0) {
-                        ESP_LOGI(MOBILE_TAG, "Ghi <ID2> thành công! \n"); //Hiển thị thông báo lên ESP32 
-                        task_ssd1306_display_text("ID write success!\n",I2C_MASTER_NUM);
-                        task_ssd1306_display_text(param->write.value, I2C_MASTER_NUM);
+                        ESP_LOGI(MOBILE_TAG, "Ghi <ID2> thành công!\n"); //Hiển thị thông báo lên ESP32 
+                        task_ssd1306_display_text("ID2 write\nsuccess!\n\n20521816", I2C_MASTER_NUM);
+                    } else {
+                        ESP_LOGI (ESP32_TAG,"Bạn đã nhập sai thứ tự hoặc cấu trúc MSSV, vui lòng dùng điện thoại nhập lại!\n");
+                        task_ssd1306_display_clear(I2C_MASTER_NUM);
+                        task_ssd1306_display_text("ERROR!\nCheck ESP32\nlog\n",I2C_MASTER_NUM);
                     }
                 } 
 
                 if(gatt_db_handle_table[IDX_CHAR_VAL_C] == param->write.handle && param->write.len == 4) {
                     if(memcmp(phat_mssv, param->write.value, param->write.len) == 0) {
-                        ESP_LOGI(MOBILE_TAG, "Ghi <ID3> thành công! \n"); //Hiển thị thông báo lên ESP32 
-                        task_ssd1306_display_text("ID write success!\n",I2C_MASTER_NUM);
-                        task_ssd1306_display_text(param->write.value, I2C_MASTER_NUM);
+                        ESP_LOGI(MOBILE_TAG, "Ghi <ID3> thành công!\n"); //Hiển thị thông báo lên ESP32 
+                        task_ssd1306_display_text("ID3 write\nsuccess!\n\n20521739",I2C_MASTER_NUM);
+                    } else {
+                        ESP_LOGI (ESP32_TAG,"Bạn đã nhập sai thứ tự hoặc cấu trúc MSSV, vui lòng dùng điện thoại nhập lại!\n");
+                        task_ssd1306_display_clear(I2C_MASTER_NUM);
+                        task_ssd1306_display_text("ERROR!\nCheck ESP32\nlog\n",I2C_MASTER_NUM);
                     }
-                } 
+                }
 
                 if(gatt_db_handle_table[IDX_CHAR_VAL_D] == param->write.handle && param->write.len == 4) {
                     if(memcmp(thai_mssv, param->write.value, param->write.len) == 0) {
-                        ESP_LOGI(MOBILE_TAG, "Ghi <ID4> thành công! \n"); //Hiển thị thông báo lên ESP32 
-                        task_ssd1306_display_text("ID write success!\n",I2C_MASTER_NUM);
-                        task_ssd1306_display_text(param->write.value, I2C_MASTER_NUM);
+                        ESP_LOGI(MOBILE_TAG, "Ghi <ID4> thành công!\n"); //Hiển thị thông báo lên ESP32 
+                        task_ssd1306_display_text("ID4 write\nsuccess!\n\n20521886",I2C_MASTER_NUM);
+                    } else {
+                        ESP_LOGI (ESP32_TAG,"Bạn đã nhập sai thứ tự hoặc cấu trúc MSSV, vui lòng dùng điện thoại nhập lại!\n");
+                        task_ssd1306_display_clear(I2C_MASTER_NUM);
+                        task_ssd1306_display_text("ERROR!\nCheck ESP32\nlog\n",I2C_MASTER_NUM);
                     }
                 } 
                 /* send response when param->write.need_rsp is true*/

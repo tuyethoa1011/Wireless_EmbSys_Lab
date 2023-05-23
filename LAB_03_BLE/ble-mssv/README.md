@@ -1,9 +1,5 @@
 | Supported Targets | ESP32 |
 | ----------------- | ----- |
 
-ESP-IDF BLE MSSV OLED SSD1306
+ESP-IDF BLE OLED SSD1306 STUDENT ID
 =======================================
-Work next session: Clean, optimize, testing with KIT.
-
-
-
