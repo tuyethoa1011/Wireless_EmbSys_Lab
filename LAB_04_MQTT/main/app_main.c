@@ -31,7 +31,7 @@
 #include "esp_log.h"
 #include "mqtt_client.h"
 
-#include "ble.h" //chỉnh sửa gì ble thì bơi vào đây
+#include "ble.h" 
 
 #include "nvs_flash.h"
 #include "esp_bt.h"
@@ -835,8 +835,6 @@ static void gatts_event_handler(esp_gatts_cb_event_t event, esp_gatt_if_t gatts_
 
 void ble_make_connection(void)
 {   
-   
-    //fflash_read();
     esp_log_buffer_hex(EXAMPLE_TAG,m_buffer,sizeof(m_buffer)); //dùng  này mới in ra được chuỗi m_buffer phục vụ cho việc debug
     esp_err_t ret;
     
