@@ -925,6 +925,9 @@ void app_main(void)
     {   
         if(!ble_status && !ble_done)
         {   
+	    //clear flash mem buffer
+	    memset(m_buffer,0,sizeof(m_buffer));
+	    flash_write();
             ble_make_connection();
             ble_status = 1;
         }
