@@ -8,4 +8,6 @@ Reminding bug, fixing in free time:
 
 Bug found date: 13/06/2023
 
+* Cập nhật ngày 14/06/2023: Đã code fix bug - Chưa test hardware
+
 
